@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Component } from 'react'
+import SoporteNotas from './componentes/SoporteNotas'
+import Formulario from './componentes/Formulario';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default class App extends Component {
+  constructor (props){
+    super (props);
+    this.state ={
+      contadores: []
+    }
+  }
+  guardar(nombre) {
+    let nuevosContadores =[...this.state.contadores, nombre];
+    this.setState({contadores: nuevosContadores});
+  }
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  eliminarContador(index) {
+    const nuevosContadores = this.state.contadores.slice();
+    nuevosContadores.splice(index, 1);
+    this.setState({ contadores: nuevosContadores });
+  }
+  
+  render() {
+    return (
+        <div className="Contenedor">
+            <Formulario 
+                guardar={(nombre) => this.guardar(nombre)}
+                eliminarTodos={() => this.eliminarTodos()}
+            />
+            <div className="ListaContadores">
+                {this.state.contadores.map((cont, index) => (
+                    <Contador key={index} eliminar={() => this.eliminarContador(index)}>
+                        {cont}
+                    </Contador>
+                ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    )
+  }
 }
 
-export default App
+//map
+//<contador valor>
+//
+//</contador>
