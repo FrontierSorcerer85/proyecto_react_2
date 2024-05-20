@@ -4,7 +4,7 @@ export default class Formulario extends Component {
     constructor(props){
         super (props);
         this.state = {
-            nombre: ""
+            nombre: "Enviar nota"
         }
     }
 }
