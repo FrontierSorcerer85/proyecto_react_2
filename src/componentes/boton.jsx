@@ -1,10 +1,12 @@
-import {Component} from "react";
-import Formulario from "./Formulario";
-export default class Formulario extends Component {
-    constructor(props){
-        super (props);
-        this.state = {
-            nombre: "Enviar nota"
-        }
-    }
-}
+import React from 'react';
+import './app.css';
+
+const Boton = ({ onClick, children, className }) => {
+  return (
+    <button className={`Boton ${className}`} onClick={onClick}>
+      {children}
+    </button>
+  );
+};
+
+export default Boton;

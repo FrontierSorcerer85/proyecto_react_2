@@ -1,102 +1,48 @@
-import { Component } from 'react'
-import SoporteNotas from './componentes/SoporteNotas'
-import Formulario from './componentes/Formulario';
-import './App.css';
+import React, { useState } from 'react';
+import './app.css';
+import Formulario from './Formulario';
+import SoporteNotas from './SoporteNotas';
 
-function App() {
-  const [title, setTitle] = useState("");
-  const [des, setDes] = useState("");
-  const [notes, setNotes] = useState(data);
-  const [count, setCount] = useState(4);
+const App = () => {
+  const [notas, setNotas] = useState([]);
 
-  function remove(id) {
-      setNotes(notes.filter((e) => e.key !== id));
-  }
+  const agregarNota = () => {
+    setNotas([...notas, '']);
+  };
 
-  function handle() {
-      if (!title || !des) {
-          window.alert("Incomplete input");
-          return;
-      }
-      setNotes([...notes, { key: count, title: title, des: des }]);
-      setCount(count + 1);
-      setTitle("");
-      setDes("");
-      console.log(notes);
-  }
+  const actualizarNota = (index, valor) => {
+    const nuevasNotas = [...notas];
+    nuevasNotas[index] = valor;
+    setNotas(nuevasNotas);
+  };
+
+  const eliminarNota = (index) => {
+    const nuevasNotas = notas.filter((_, i) => i !== index);
+    setNotas(nuevasNotas);
+  };
+
+  const borrarTodo = () => {
+    setNotas([]);
+  };
+
+  const calcularPromedio = () => {
+    const suma = notas.reduce((acc, nota) => acc + parseFloat(nota || 0), 0);
+    return notas.length ? (suma / notas.length).toFixed(2) : 0;
+  };
 
   return (
-      <div className="App">
-          <div className="card">
-              <div className="head">
-                  <h1>React notes</h1>
-              </div>
-              <div className="notes">
-                  {notes.map((e) => (
-                      <div className="notes-item">
-                          <div style={{ width: "90%" }}>
-                              <h4>Title: {e.title}</h4>
-                              <p>Note: {e.des}</p>
-                          </div>
-                          <button
-                              type="input"
-                              style={{
-                                  fontSize: "20px",
-                                  width: "8%",
-                                  height: "35px",
-                                  padding: "0 2% 0 2%",
-                                  color: "black",
-                              }}
-                              onClick={() => remove(e.key)}
-                          >
-                              X
-                          </button>
-                      </div>
-                  ))}
-                  <div className="add">
-                      <h3>Add Notes</h3>
-                      <input
-                          type="text"
-                          id="title"
-                          placeHolder="Add title"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
-                      ></input>
-                      <input
-                          type="text"
-                          id="description"
-                          placeholder="Notes"
-                          value={des}
-                          onChange={(e) => {
-                              setDes(e.target.value);
-                          }}
-                      ></input>
-                      <button type="submit" onClick={handle}>
-                          Submit
-                      </button>
-                  </div>
-              </div>
-          </div>
-      </div>
+    <div id="root">
+      <h1>Ingresar Notas</h1>
+      <Formulario
+        notas={notas}
+        agregarNota={agregarNota}
+        actualizarNota={actualizarNota}
+        eliminarNota={eliminarNota}
+        borrarTodo={borrarTodo}
+      />
+      <SoporteNotas notas={notas} promedio={calcularPromedio()} />
+    </div>
   );
-}
-const data = [
-  {
-      key: 0,
-      title: "Html",
-      des: "HyperText MarkUp Language",
-  },
-  { key: 1, title: "CSS", des: "StyleSheet" },
-  {
-      key: 2,
-      title: "JavaScript",
-      des: "Scripting language for web",
-  },
-  {
-      key: 3,
-      title: "React",
-      des: "JavaScript framework",
-  },
-];
+};
 
 export default App;

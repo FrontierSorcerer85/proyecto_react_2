@@ -1,28 +1,27 @@
-import {Component} from "react";
-import Boton from "./Boton";
-export default class Formulario extends Component {
-    constructor(props){
-        super (props);
-        this.state = {
-            nombre: ""
-        }
-    }
+import React from 'react';
+import './app.css';
+import Boton from './Boton';
 
-    render() {
-        return (
-            <div className="Formulario">
-                <input type="text"
-                placeholder="Nombre"
-                value={this.state.nombre}
-                onChange = {(e) => this.setState({nombre: e.target.value})}
-                />
-                <Boton accion= {() => this.props.guardar(this.state.nombre)} 
-                simbolo="Guardar"/>
-                <Boton 
-                    accion={() => this.props.eliminarTodos()} 
-                    simbolo="Eliminar Todo"
-                />
+const Formulario = ({ notas, agregarNota, actualizarNota, eliminarNota, borrarTodo }) => {
+  return (
+    <div className="Formulario">
+      {notas.map((nota, index) => (
+        <div key={index} className="NotaItem">
+          <input
+            className="InputNota"
+            type="number"
+            value={nota}
+            onChange={(e) => actualizarNota(index, e.target.value)}
+          />
+          <Boton className="BotonEliminar" onClick={() => eliminarNota(index)}>Eliminar</Boton>
         </div>
-        )
-    }
-}
+      ))}
+      <div className="Botonera">
+        <Boton onClick={agregarNota}>Agregar Nota</Boton>
+        <Boton onClick={borrarTodo}>Borrar Todo</Boton>
+      </div>
+    </div>
+  );
+};
+
+export default Formulario;
