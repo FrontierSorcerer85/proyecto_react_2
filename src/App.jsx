@@ -3,44 +3,100 @@ import SoporteNotas from './componentes/SoporteNotas'
 import Formulario from './componentes/Formulario';
 import './App.css';
 
-export default class App extends Component {
-  constructor (props){
-    super (props);
-    this.state ={
-      contadores: []
-    }
-  }
-  guardar(nombre) {
-    let nuevosContadores =[...this.state.contadores, nombre];
-    this.setState({contadores: nuevosContadores});
+function App() {
+  const [title, setTitle] = useState("");
+  const [des, setDes] = useState("");
+  const [notes, setNotes] = useState(data);
+  const [count, setCount] = useState(4);
+
+  function remove(id) {
+      setNotes(notes.filter((e) => e.key !== id));
   }
 
-  eliminarContador(index) {
-    const nuevosContadores = this.state.contadores.slice();
-    nuevosContadores.splice(index, 1);
-    this.setState({ contadores: nuevosContadores });
+  function handle() {
+      if (!title || !des) {
+          window.alert("Incomplete input");
+          return;
+      }
+      setNotes([...notes, { key: count, title: title, des: des }]);
+      setCount(count + 1);
+      setTitle("");
+      setDes("");
+      console.log(notes);
   }
-  
-  render() {
-    return (
-        <div className="Contenedor">
-            <Formulario 
-                guardar={(nombre) => this.guardar(nombre)}
-                eliminarTodos={() => this.eliminarTodos()}
-            />
-            <div className="ListaContadores">
-                {this.state.contadores.map((cont, index) => (
-                    <Contador key={index} eliminar={() => this.eliminarContador(index)}>
-                        {cont}
-                    </Contador>
-                ))}
+
+  return (
+      <div className="App">
+          <div className="card">
+              <div className="head">
+                  <h1>React notes</h1>
+              </div>
+              <div className="notes">
+                  {notes.map((e) => (
+                      <div className="notes-item">
+                          <div style={{ width: "90%" }}>
+                              <h4>Title: {e.title}</h4>
+                              <p>Note: {e.des}</p>
+                          </div>
+                          <button
+                              type="input"
+                              style={{
+                                  fontSize: "20px",
+                                  width: "8%",
+                                  height: "35px",
+                                  padding: "0 2% 0 2%",
+                                  color: "black",
+                              }}
+                              onClick={() => remove(e.key)}
+                          >
+                              X
+                          </button>
+                      </div>
+                  ))}
+                  <div className="add">
+                      <h3>Add Notes</h3>
+                      <input
+                          type="text"
+                          id="title"
+                          placeHolder="Add title"
+                          value={title}
+                          onChange={(e) => setTitle(e.target.value)}
+                      ></input>
+                      <input
+                          type="text"
+                          id="description"
+                          placeholder="Notes"
+                          value={des}
+                          onChange={(e) => {
+                              setDes(e.target.value);
+                          }}
+                      ></input>
+                      <button type="submit" onClick={handle}>
+                          Submit
+                      </button>
+                  </div>
+              </div>
+          </div>
       </div>
-      </div>
-    )
-  }
+  );
 }
+const data = [
+  {
+      key: 0,
+      title: "Html",
+      des: "HyperText MarkUp Language",
+  },
+  { key: 1, title: "CSS", des: "StyleSheet" },
+  {
+      key: 2,
+      title: "JavaScript",
+      des: "Scripting language for web",
+  },
+  {
+      key: 3,
+      title: "React",
+      des: "JavaScript framework",
+  },
+];
 
-//map
-//<contador valor>
-//
-//</contador>
+export default App;
