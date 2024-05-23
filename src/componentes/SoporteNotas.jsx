@@ -1,5 +1,4 @@
 import React from 'react';
-import './app.css';
 
 const SoporteNotas = ({ notas, promedio }) => {
   return (

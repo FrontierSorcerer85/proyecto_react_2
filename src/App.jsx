@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './app.css';
-import Formulario from './Formulario';
-import SoporteNotas from './SoporteNotas';
+import './App.css';
+import Formulario from './componentes/Formulario';
+import SoporteNotas from './componentes/SoporteNotas';
 
 const App = () => {
   const [notas, setNotas] = useState([]);
