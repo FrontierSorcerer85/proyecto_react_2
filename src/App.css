@@ -1,75 +1,77 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: indigo;
+}
+
 #root {
   display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
   padding: 20px;
 }
 
-.Formulario {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: lightblue;
-  border-radius: 15px;
-  padding: 15px 20px;
-  margin: 10px;
-  width: 100%;
-  max-width: 500px;
-}
-
-.InputNota {
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  width: calc(100% - 24px);
-}
-
-.Boton {
-  padding: 10px 15px;
-  font-size: 16px;
-  font-weight: bold;
-  margin: 10px 5px;
+h1 {
   text-align: center;
-  background-color: gold;
-  border-radius: 10px;
-  cursor: pointer;
-  border: none;
+  color: lightcoral;
 }
 
-.BotonEliminar {
-  background-color: red;
-  color: white;
+.main-content {
+  display: flex;
+  gap: 20px;
+}
+
+.Formulario {
+  flex: 2;
 }
 
 .Botonera {
   display: flex;
-  justify-content: space-between;
-}
-
-.SoporteNotas {
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.Titulo {
-  font-size: 18px;
-  text-align: center;
-  width: 100%;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.Promedio {
-  font-size: 20px;
-  font-weight: bold;
-  color: darkblue;
+.Boton {
+  background-color: greenyellow;
+  color: black;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: fantasy;
+}
+
+.BotonEliminar {
+  background-color: coral;
+}
+
+.Boton:hover {
+  opacity: 0.8;
 }
 
 .NotaItem {
-  margin: 5px 0;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.InputNombre, .InputMateria, .InputNota {
+  padding: 5px;
+  border: 1px solid goldenrod;
+  border-radius: 4px;
+}
+
+.SoporteNotas {
+  flex: 1;
+}
+
+.NotasIngresadas, .PromedioNotas {
+  background-color: skyblue;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: goldenrod;
+}
+
+.Titulo, .Promedio {
+  margin: 0;
 }
