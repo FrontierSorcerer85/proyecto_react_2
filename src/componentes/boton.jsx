@@ -1,5 +1,4 @@
 import React from 'react';
-import '../App.css';
 
 const Boton = ({ onClick, children, className }) => {
   return (

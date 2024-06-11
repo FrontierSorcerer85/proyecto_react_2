@@ -1,6 +1,5 @@
 import React from 'react';
-import '../App.css';
-import Boton from '../componentes/Boton';
+import Boton from './Boton';
 
 const Formulario = ({ notas, agregarNota, actualizarNota, eliminarNota, borrarTodo }) => {
   return (
